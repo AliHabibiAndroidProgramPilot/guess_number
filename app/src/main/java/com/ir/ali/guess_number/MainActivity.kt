@@ -67,6 +67,7 @@ class MainActivity : AppCompatActivity() {
         binding.guess1.addTextChangedListener(textWatcher)
         binding.guess2.addTextChangedListener(textWatcher)
         binding.guess3.addTextChangedListener(textWatcher)
+        binding.guessCheck.setOnClickListener {  }
     }
     private fun requestFocus() {
         val editText: View = binding.guess1
