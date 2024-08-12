@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">Guess_Number</string>
+    <string name="app_name">Guess Number</string>
+    <string name="range">Range is 1..10</string>
 </resources>
