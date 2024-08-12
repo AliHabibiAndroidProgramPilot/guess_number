@@ -1,8 +1,9 @@
 package com.ir.ali.guess_number
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
@@ -43,11 +44,32 @@ class MainActivity : AppCompatActivity() {
                 binding.rangeText.text = "Range is 1..20"
             }
         }
+        val textWatcher = object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+            override fun afterTextChanged(p0: Editable?) {
+                toExtendFab()
+            }
+        }
+        binding.guess1.addTextChangedListener(textWatcher)
+        binding.guess2.addTextChangedListener(textWatcher)
+        binding.guess3.addTextChangedListener(textWatcher)
     }
     private fun requestFocus() {
         val editText: View = binding.guess1
         editText.requestFocus()
         val makeFocus: InputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         makeFocus.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT)
+    }
+    private fun toExtendFab() {
+        if (
+            binding.guess1.text!!.isNotBlank() &&
+            binding.guess2.text!!.isNotBlank() &&
+            binding.guess3.text!!.isNotBlank()
+        ) {
+            binding.guessCheck.extend()
+        }
     }
 }
