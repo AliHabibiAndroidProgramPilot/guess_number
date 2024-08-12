@@ -2,6 +2,7 @@ package com.ir.ali.guess_number
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import com.ir.ali.guess_number.databinding.ActivityMainBinding
 
@@ -12,28 +13,30 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.oneToFive.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) binding.rangeText.text = "Range is 1..5"
+            if (isChecked) {
+                val anim = AnimationUtils.loadAnimation(this, R.anim.aplha)
+                anim.fillAfter = true
+                anim.duration = 550
+                binding.rangeText.startAnimation(anim)
+                binding.rangeText.text = "Range is 1..5"
+            }
         }
         binding.oneToTen.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) binding.rangeText.text = "Range is 1..10"
+            if (isChecked) {
+                val anim = AnimationUtils.loadAnimation(this, R.anim.aplha)
+                anim.fillAfter = true
+                anim.duration = 550
+                binding.rangeText.startAnimation(anim)
+                binding.rangeText.text = "Range is 1..10"
+            }
         }
         binding.oneToTwenty.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) binding.rangeText.text = "Range is 1..20"
-        }
-    }
-
-    private fun matchTextWithRadioGroup() {
-        binding.rangeRadioGroup.setOnCheckedChangeListener { radioGroup, _ ->
-            when (radioGroup.id) {
-                R.id.one_to_five -> {
-                    binding.rangeText.text = "Range is 1..5"
-                }
-                R.id.one_to_ten -> {
-                    binding.rangeText.text = "Range is 1..10"
-                }
-                R.id.one_to_twenty -> {
-                    binding.rangeText.text = "Range is 1..20"
-                }
+            if (isChecked) {
+                val anim = AnimationUtils.loadAnimation(this, R.anim.aplha)
+                anim.fillAfter = true
+                anim.duration = 550
+                binding.rangeText.startAnimation(anim)
+                binding.rangeText.text = "Range is 1..20"
             }
         }
     }
