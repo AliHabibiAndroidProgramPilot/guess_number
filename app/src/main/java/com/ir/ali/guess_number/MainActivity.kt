@@ -1,5 +1,6 @@
 package com.ir.ali.guess_number
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -49,7 +50,17 @@ class MainActivity : AppCompatActivity() {
             }
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
+            @SuppressLint("SetTextI18n")
             override fun afterTextChanged(p0: Editable?) {
+                if(binding.guess1.text!!.isNotBlank() && binding.guess2.text!!.isNotBlank() && binding.guess3.text!!.isNotBlank()) {
+                    if(
+                        binding.guess1.text.toString().toIntOrNull() == binding.guess2.text.toString().toInt() ||
+                        binding.guess2.text.toString().toIntOrNull() == binding.guess3.text.toString().toInt() ||
+                        binding.guess3.text.toString().toIntOrNull() == binding.guess1.text.toString().toInt()
+                    ) {
+                        binding.sameGuess.visibility = View.VISIBLE
+                    } else binding.sameGuess.visibility = View.INVISIBLE
+                }
                 toExtendFab()
             }
         }

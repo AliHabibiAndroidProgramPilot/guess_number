@@ -8,4 +8,5 @@
     <string name="guess2">guess2</string>
     <string name="guess3">guess3</string>
     <string name="check_guess">check Guess</string>
+    <string name="same_guess">same guess!</string>
 </resources>
