@@ -67,7 +67,14 @@ class MainActivity : AppCompatActivity() {
         binding.guess1.addTextChangedListener(textWatcher)
         binding.guess2.addTextChangedListener(textWatcher)
         binding.guess3.addTextChangedListener(textWatcher)
-        binding.guessCheck.setOnClickListener {  }
+        binding.guessCheck.setOnClickListener {
+            if (binding.oneToFive.isChecked)
+                randomNumberGenerator(1)
+            if (binding.oneToTen.isChecked)
+                randomNumberGenerator(2)
+            if (binding.oneToTwenty.isChecked)
+                randomNumberGenerator(3)
+        }
     }
     private fun requestFocus() {
         val editText: View = binding.guess1
@@ -82,6 +89,20 @@ class MainActivity : AppCompatActivity() {
             binding.guess3.text!!.isNotBlank()
         ) {
             binding.guessCheck.extend()
+        }
+    }
+    private fun randomNumberGenerator(range: Int) {
+        when(range){
+            1 -> {
+                val randomNumber = (1..5).random()
+            }
+            2 -> {
+                val randomNumber = (1..10).random()
+            }
+            3 -> {
+                val randomNumber = (1..20).random()
+            }
+            else -> {}
         }
     }
 }
