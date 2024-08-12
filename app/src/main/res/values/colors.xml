@@ -7,4 +7,16 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="surfaceDim">#0f1417</color>
+    <color name="surface.Container">#1b2023</color>
+    <color name="primary">#89d0ed</color>
+    <color name="onPrimary">#003544</color>
+    <color name="secondary">#b3cad5</color>
+    <color name="onSecondary">#1e333c</color>
+    <color name="tertiary">#c4c3eb</color>
+    <color name="onTertiary">#2d2d4d</color>
+    <color name="primaryContainer">#004d62</color>
+    <color name="onPrimaryContainer">#baeaff</color>
+    <color name="secondaryContainer">#354a53</color>
+    <color name="onSecondaryContainer">#cfe6f1</color>
 </resources>
