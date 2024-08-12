@@ -137,5 +137,16 @@
             android:layout_width="135dp"
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
-
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/guessCheck"
+        android:layout_gravity="center"
+        android:text="@string/check_guess"
+        app:icon="@drawable/ic_check"
+        android:layout_marginTop="45dp"
+        android:scaleY="1.2"
+        android:scaleX="1.2"
+        app:iconSize="28dp"
+        app:iconGravity="textStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 </LinearLayout>

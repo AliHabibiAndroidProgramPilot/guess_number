@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         requestFocus()
+        binding.guessCheck.shrink()
         binding.oneToFive.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 val anim = AnimationUtils.loadAnimation(this, R.anim.aplha)
