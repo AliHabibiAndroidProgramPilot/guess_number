@@ -19,4 +19,49 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </Toolbar>
+    <RadioGroup
+        android:id="@+id/range_radioGroup"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:checkedButton="@id/one_to_five"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:id="@+id/one_to_five"
+            android:text="@string/one_to_five"
+            android:textSize="22sp"
+            android:layout_margin="20dp"
+            android:textColor="@color/white"
+            android:buttonTint="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <RadioButton
+            android:id="@+id/one_to_ten"
+            android:text="@string/one_to_ten"
+            android:textSize="22sp"
+            android:textColor="@color/white"
+            android:buttonTint="@color/white"
+            android:layout_margin="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <RadioButton
+            android:id="@+id/one_to_twenty"
+            android:gravity="center"
+            android:text="@string/one_to_twenty"
+            android:textSize="22sp"
+            android:textColor="@color/white"
+            android:buttonTint="@color/white"
+            android:layout_margin="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RadioGroup>
+    <TextView
+        android:id="@+id/rangeText"
+        android:text="@string/range"
+        android:layout_gravity="center"
+        android:textSize="28sp"
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 </LinearLayout>
