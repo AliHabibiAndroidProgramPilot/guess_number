@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
     //Local variable as a Random number
     private var randomNumber: Int = 0
     //Local List to take user inputs
-    private lateinit var userGuesses: List<Int>
+    private lateinit var userGuesses: List<Int?>
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -145,9 +145,9 @@ class MainActivity : AppCompatActivity() {
     private fun kernel() {
         // Put users inputs in list
         userGuesses = listOf(
-            binding.guess1.text.toString().toInt(),
-            binding.guess2.text.toString().toInt(),
-            binding.guess3.text.toString().toInt()
+            binding.guess1.text.toString().toIntOrNull(),
+            binding.guess2.text.toString().toIntOrNull(),
+            binding.guess3.text.toString().toIntOrNull()
         )
         //Check what range is selected
         if (binding.oneToFive.isChecked)
