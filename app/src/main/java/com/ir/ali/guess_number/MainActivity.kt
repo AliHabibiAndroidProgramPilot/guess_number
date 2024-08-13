@@ -15,9 +15,9 @@ import com.ir.ali.guess_number.databinding.UnsuccessfulBottomsheetDialogBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    //Local variable as a Random number
     private var randomNumber: Int = 0
-
-    //    private var guessArray: IntArray = intArrayOf()
+    //Local List to take user inputs
     private lateinit var userGuesses: List<Int>
 
     @SuppressLint("SetTextI18n")
@@ -25,8 +25,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        //Make a top edit text in Focus mode
         requestFocus()
         binding.guessCheck.shrink()
+        /* Radio buttons Animations
+        Each Radio button contains a Click listener to manage how animations can apply on them
+        Used anim directory and alpha resource file to apply alpha(opacity) animation
+        */
         binding.oneToFive.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 val anim = AnimationUtils.loadAnimation(this, R.anim.aplha)
@@ -54,6 +59,13 @@ class MainActivity : AppCompatActivity() {
                 binding.rangeText.text = "Range is 1..20"
             }
         }
+        /** object textWatcher
+         * textWatcher object passed to each edit text AfterTextChanged listener
+         *@receiver object(TextWatcher)
+         *@propertyName textWatcher
+         *
+         * @shows a message warning for same guesses
+         */
         val textWatcher = object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
@@ -85,7 +97,11 @@ class MainActivity : AppCompatActivity() {
             kernel()
         }
     }
-
+    /** requestFocus
+     * Make Focus on first edit text.
+     *
+     *@author Ali
+     */
     private fun requestFocus() {
         val editText: View = binding.guess1
         editText.requestFocus()
@@ -93,7 +109,7 @@ class MainActivity : AppCompatActivity() {
             getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         makeFocus.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT)
     }
-
+    //Makes fab to extend when all three input sections have value
     private fun toExtendFab() {
         if (
             binding.guess1.text!!.isNotBlank() &&
@@ -103,7 +119,12 @@ class MainActivity : AppCompatActivity() {
             binding.guessCheck.extend()
         }
     }
-
+    /** randomNumberGenerator
+     * Generates a Random number
+     *
+     *@author Ali
+     * @return Random Integer.
+     */
     private fun randomNumberGenerator(range: Int): Int {
         var randomNumber: Int = 0
         when (range) {
@@ -122,30 +143,37 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun kernel() {
-        // Put users inputs in array
+        // Put users inputs in list
         userGuesses = listOf(
             binding.guess1.text.toString().toInt(),
             binding.guess2.text.toString().toInt(),
             binding.guess3.text.toString().toInt()
         )
+        //Check what range is selected
         if (binding.oneToFive.isChecked)
             randomNumber = randomNumberGenerator(1)
         if (binding.oneToTen.isChecked)
             randomNumber = randomNumberGenerator(2)
         if (binding.oneToTwenty.isChecked)
             randomNumber = randomNumberGenerator(3)
-        if (randomNumber in userGuesses) successBottomSheetDialog()
-        else unsuccessfulBottomSheetDialog()
+        //Manage to show Dialog based on user inputs and random number
+        if (randomNumber in userGuesses)
+            successBottomSheetDialog()
+        else
+            unsuccessfulBottomSheetDialog()
     }
 
+    //Implement Unsuccessful Bottom Sheet Dialog
     @SuppressLint("SetTextI18n")
     private fun unsuccessfulBottomSheetDialog() {
         val sheetDialog = BottomSheetDialog(this)
         val bottomSheetDialogBinding = UnsuccessfulBottomsheetDialogBinding.inflate(layoutInflater)
         bottomSheetDialogBinding.showRandomNumber.text = "Random number was: $randomNumber"
-        bottomSheetDialogBinding.userNumbers.text = userGuesses.joinToString(separator = ", ", prefix = "Your guess was: ", limit = 4)
+        bottomSheetDialogBinding.userNumbers.text =
+            userGuesses.joinToString(separator = ", ", prefix = "Your guess was: ", limit = 4)
         sheetDialog.setContentView(bottomSheetDialogBinding.root)
         sheetDialog.show()
+        //Clear inputs if Bottom Sheet Dialog dismissed and request Focus for first edit text
         sheetDialog.setOnDismissListener {
             binding.guess1.text?.clear()
             binding.guess2.text?.clear()
@@ -153,7 +181,7 @@ class MainActivity : AppCompatActivity() {
             requestFocus()
         }
     }
-
+    //Implement Successful Bottom Sheet Dialog
     @SuppressLint("SetTextI18n")
     private fun successBottomSheetDialog() {
         val sheetDialog = BottomSheetDialog(this)
@@ -161,6 +189,7 @@ class MainActivity : AppCompatActivity() {
         bottomSheetDialogBinding.showRandomNumber.text = "Random number was: $randomNumber"
         sheetDialog.setContentView(bottomSheetDialogBinding.root)
         sheetDialog.show()
+        //Clear inputs if Bottom Sheet Dialog dismissed and request Focus for first edit text
         sheetDialog.setOnDismissListener {
             binding.guess1.text?.clear()
             binding.guess2.text?.clear()
