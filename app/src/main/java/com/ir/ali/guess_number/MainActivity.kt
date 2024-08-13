@@ -15,7 +15,8 @@ import com.ir.ali.guess_number.databinding.UnsuccessfulBottomsheetDialogBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-
+    private var randomNumber: Int = 0
+    private var guessArray: IntArray = intArrayOf()
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -119,12 +120,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun kernel() {
         // Put users inputs in array
-        val guessArray: IntArray = intArrayOf(
+        guessArray = intArrayOf(
             binding.guess1.text.toString().toInt(),
             binding.guess2.text.toString().toInt(),
             binding.guess3.text.toString().toInt()
         )
-        var randomNumber: Int = 0
         if (binding.oneToFive.isChecked)
             randomNumber = randomNumberGenerator(1)
         if (binding.oneToTen.isChecked)
@@ -136,17 +136,24 @@ class MainActivity : AppCompatActivity() {
         else unsuccessfulBottomSheetDialog()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun unsuccessfulBottomSheetDialog() {
         val sheetDialog = BottomSheetDialog(this)
-        val view = UnsuccessfulBottomsheetDialogBinding.inflate(layoutInflater)
-        sheetDialog.setContentView(view.root)
+        val bottomSheetDialogBinding = UnsuccessfulBottomsheetDialogBinding.inflate(layoutInflater)
+        bottomSheetDialogBinding.showRandomNumber.text = "Random number was: $randomNumber"
+        bottomSheetDialogBinding.userNumbers.text = guessArray.joinToString(separator = ", ", prefix = "Your guess was: ")
+        sheetDialog.setContentView(bottomSheetDialogBinding.root)
+        sheetDialog.setCancelable(true)
         sheetDialog.show()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun successBottomSheetDialog() {
         val sheetDialog = BottomSheetDialog(this)
-        val view = SuccessfulBottomsheetDialogBinding.inflate(layoutInflater)
-        sheetDialog.setContentView(view.root)
+        val bottomSheetDialogBinding = SuccessfulBottomsheetDialogBinding.inflate(layoutInflater)
+        bottomSheetDialogBinding.showRandomNumber.text = "Random number was: $randomNumber"
+        sheetDialog.setContentView(bottomSheetDialogBinding.root)
+        sheetDialog.setCancelable(true)
         sheetDialog.show()
     }
 }
