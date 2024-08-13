@@ -126,7 +126,7 @@ class MainActivity : AppCompatActivity() {
      * @return Random Integer.
      */
     private fun randomNumberGenerator(range: Int): Int {
-        var randomNumber: Int = 0
+        var randomNumber = 0
         when (range) {
             1 -> {
                 randomNumber = (1..5).random()
