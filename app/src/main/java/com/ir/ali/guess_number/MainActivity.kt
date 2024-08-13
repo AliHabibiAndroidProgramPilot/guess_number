@@ -16,8 +16,10 @@ import com.ir.ali.guess_number.databinding.UnsuccessfulBottomsheetDialogBinding
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var randomNumber: Int = 0
-//    private var guessArray: IntArray = intArrayOf()
+
+    //    private var guessArray: IntArray = intArrayOf()
     private lateinit var userGuesses: List<Int>
+
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -135,6 +137,7 @@ class MainActivity : AppCompatActivity() {
         if (randomNumber in userGuesses) successBottomSheetDialog()
         else unsuccessfulBottomSheetDialog()
     }
+
     @SuppressLint("SetTextI18n")
     private fun unsuccessfulBottomSheetDialog() {
         val sheetDialog = BottomSheetDialog(this)
@@ -143,6 +146,12 @@ class MainActivity : AppCompatActivity() {
         bottomSheetDialogBinding.userNumbers.text = userGuesses.joinToString(separator = ", ", prefix = "Your guess was: ", limit = 4)
         sheetDialog.setContentView(bottomSheetDialogBinding.root)
         sheetDialog.show()
+        sheetDialog.setOnDismissListener {
+            binding.guess1.text?.clear()
+            binding.guess2.text?.clear()
+            binding.guess3.text?.clear()
+            requestFocus()
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -152,5 +161,11 @@ class MainActivity : AppCompatActivity() {
         bottomSheetDialogBinding.showRandomNumber.text = "Random number was: $randomNumber"
         sheetDialog.setContentView(bottomSheetDialogBinding.root)
         sheetDialog.show()
+        sheetDialog.setOnDismissListener {
+            binding.guess1.text?.clear()
+            binding.guess2.text?.clear()
+            binding.guess3.text?.clear()
+            requestFocus()
+        }
     }
 }
