@@ -16,7 +16,8 @@ import com.ir.ali.guess_number.databinding.UnsuccessfulBottomsheetDialogBinding
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var randomNumber: Int = 0
-    private var guessArray: IntArray = intArrayOf()
+//    private var guessArray: IntArray = intArrayOf()
+    private lateinit var userGuesses: List<Int>
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -120,7 +121,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun kernel() {
         // Put users inputs in array
-        guessArray = intArrayOf(
+        userGuesses = listOf(
             binding.guess1.text.toString().toInt(),
             binding.guess2.text.toString().toInt(),
             binding.guess3.text.toString().toInt()
@@ -131,19 +132,16 @@ class MainActivity : AppCompatActivity() {
             randomNumber = randomNumberGenerator(2)
         if (binding.oneToTwenty.isChecked)
             randomNumber = randomNumberGenerator(3)
-        val state: Boolean = randomNumber in guessArray
-        if (state) successBottomSheetDialog()
+        if (randomNumber in userGuesses) successBottomSheetDialog()
         else unsuccessfulBottomSheetDialog()
     }
-
     @SuppressLint("SetTextI18n")
     private fun unsuccessfulBottomSheetDialog() {
         val sheetDialog = BottomSheetDialog(this)
         val bottomSheetDialogBinding = UnsuccessfulBottomsheetDialogBinding.inflate(layoutInflater)
         bottomSheetDialogBinding.showRandomNumber.text = "Random number was: $randomNumber"
-        bottomSheetDialogBinding.userNumbers.text = guessArray.joinToString(separator = ", ", prefix = "Your guess was: ")
+        bottomSheetDialogBinding.userNumbers.text = userGuesses.joinToString(separator = ", ", prefix = "Your guess was: ", limit = 4)
         sheetDialog.setContentView(bottomSheetDialogBinding.root)
-        sheetDialog.setCancelable(true)
         sheetDialog.show()
     }
 
@@ -153,7 +151,6 @@ class MainActivity : AppCompatActivity() {
         val bottomSheetDialogBinding = SuccessfulBottomsheetDialogBinding.inflate(layoutInflater)
         bottomSheetDialogBinding.showRandomNumber.text = "Random number was: $randomNumber"
         sheetDialog.setContentView(bottomSheetDialogBinding.root)
-        sheetDialog.setCancelable(true)
         sheetDialog.show()
     }
 }
