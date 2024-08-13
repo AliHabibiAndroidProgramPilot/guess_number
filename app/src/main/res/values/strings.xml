@@ -9,4 +9,7 @@
     <string name="guess3">guess3</string>
     <string name="check_guess">check Guess</string>
     <string name="same_guess">same guess!</string>
+    <string name="sheet_title">Oh! you didn\'t make it :(</string>
+    <string name="broken_light">broken_light</string>
+    <string name="sheet_title2">WOW, You made it</string>
 </resources>

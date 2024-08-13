@@ -8,10 +8,14 @@ import android.text.TextWatcher
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.ir.ali.guess_number.databinding.ActivityMainBinding
+import com.ir.ali.guess_number.databinding.SuccessfulBottomsheetDialogBinding
+import com.ir.ali.guess_number.databinding.UnsuccessfulBottomsheetDialogBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,8 +53,10 @@ class MainActivity : AppCompatActivity() {
         val textWatcher = object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
+
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
+
             @SuppressLint("SetTextI18n")
             override fun afterTextChanged(p0: Editable?) {
                 if (binding.guess1.text!!.isNotBlank() && binding.guess2.text!!.isNotBlank() && binding.guess3.text!!.isNotBlank()) {
@@ -75,6 +81,7 @@ class MainActivity : AppCompatActivity() {
             kernel()
         }
     }
+
     private fun requestFocus() {
         val editText: View = binding.guess1
         editText.requestFocus()
@@ -82,6 +89,7 @@ class MainActivity : AppCompatActivity() {
             getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         makeFocus.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT)
     }
+
     private fun toExtendFab() {
         if (
             binding.guess1.text!!.isNotBlank() &&
@@ -91,6 +99,7 @@ class MainActivity : AppCompatActivity() {
             binding.guessCheck.extend()
         }
     }
+
     private fun randomNumberGenerator(range: Int): Int {
         var randomNumber: Int = 0
         when (range) {
@@ -107,6 +116,7 @@ class MainActivity : AppCompatActivity() {
         }
         return randomNumber
     }
+
     private fun kernel() {
         // Put users inputs in array
         val guessArray: IntArray = intArrayOf(
@@ -122,14 +132,21 @@ class MainActivity : AppCompatActivity() {
         if (binding.oneToTwenty.isChecked)
             randomNumber = randomNumberGenerator(3)
         val state: Boolean = randomNumber in guessArray
-        if (state) successAlertDialog()
-        else unsuccessfulAlertDialog()
-   }
-    private fun unsuccessfulAlertDialog() {
-
+        if (state) successBottomSheetDialog()
+        else unsuccessfulBottomSheetDialog()
     }
 
-    private fun successAlertDialog() {
+    private fun unsuccessfulBottomSheetDialog() {
+        val sheetDialog = BottomSheetDialog(this)
+        val view = UnsuccessfulBottomsheetDialogBinding.inflate(layoutInflater)
+        sheetDialog.setContentView(view.root)
+        sheetDialog.show()
+    }
 
+    private fun successBottomSheetDialog() {
+        val sheetDialog = BottomSheetDialog(this)
+        val view = SuccessfulBottomsheetDialogBinding.inflate(layoutInflater)
+        sheetDialog.setContentView(view.root)
+        sheetDialog.show()
     }
 }
