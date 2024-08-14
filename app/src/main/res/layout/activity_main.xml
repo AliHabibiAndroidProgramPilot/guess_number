@@ -144,7 +144,7 @@
         android:layout_gravity="center"
         android:text="@string/check_guess"
         app:icon="@drawable/ic_check"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="25dp"
         android:scaleY="1.2"
         android:scaleX="1.2"
         app:iconSize="28dp"
