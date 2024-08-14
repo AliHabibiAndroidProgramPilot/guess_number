@@ -56,7 +56,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/MyEditTextTheme"
+        style="@style/editText_theme"
         android:gravity="center_horizontal"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
@@ -68,6 +68,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/guess1"
             android:gravity="center"
+            android:textColor="@color/white"
             android:inputType="number"
             android:layout_margin="20dp"
             android:maxLength="2"
@@ -77,7 +78,7 @@
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/MyEditTextTheme"
+        style="@style/editText_theme"
         android:gravity="center_horizontal"
         android:layout_gravity="center"
         android:layout_marginStart="10dp"
@@ -88,6 +89,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/guess2"
             android:gravity="center"
+            android:textColor="@color/white"
             android:inputType="number"
             android:layout_margin="20dp"
             android:maxLength="2"
@@ -97,7 +99,7 @@
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/MyEditTextTheme"
+        style="@style/editText_theme"
         android:gravity="center_horizontal"
         android:layout_gravity="center"
         android:layout_marginStart="10dp"
@@ -107,6 +109,7 @@
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/guess3"
+            android:textColor="@color/white"
             android:gravity="center"
             android:inputType="number"
             android:layout_margin="20dp"
